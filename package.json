@@ -1,0 +1,16 @@
+{
+  "name": "omnitest-cdn",
+  "version": "1.0.0",
+  "description": "Enterprise CDN Performance Intelligence Platform",
+  "main": "index.html",
+  "scripts": {
+    "dev": "npx http-server -p 8080",
+    "deploy": "netlify deploy --prod"
+  },
+  "keywords": ["cdn", "performance", "akamai", "observability"],
+  "author": "OmniTest CDN",
+  "license": "MIT",
+  "devDependencies": {
+    "netlify-cli": "^17.0.0"
+  }
+}

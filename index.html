@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OmniTest CDN - Enterprise Performance Intelligence</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="icon" type="image/x-icon" href="/assets/favicon.ico">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+</head>
+<body>
+    <!-- No Auth Overlay - Direct access -->
+    <div class="app-container">
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <div class="logo">⚡ OmniTest</div>
+                <div class="logo-sub">CDN</div>
+            </div>
+            <nav class="sidebar-nav">
+                <a href="#" class="nav-item active" data-page="dashboard">📊 Dashboard</a>
+                <a href="#" class="nav-item" data-page="executive">📡 Executive Dashboard</a>
+                <a href="#" class="nav-item" data-page="analyzer">🔍 Analyzer</a>
+                <a href="#" class="nav-item" data-page="recorder">🎬 Recorder</a>
+                <a href="#" class="nav-item" data-page="mesh">🌐 Mesh Analysis</a>
+                <a href="#" class="nav-item" data-page="reports">📄 Reports</a>
+                <a href="#" class="nav-item" data-page="settings">⚙️ Settings</a>
+            </nav>
+            <div class="sidebar-footer">
+                <div class="user-info">
+                    <div class="user-avatar-placeholder">👤</div>
+                    <div class="user-details">
+                        <span>Performance Engineer</span>
+                        <span>Local Mode</span>
+                    </div>
+                </div>
+            </div>
+        </aside>
+        <main class="main-content">
+            <div id="pageContent">
+                <div style="text-align:center;padding:60px">
+                    <div class="loading-spinner" style="margin:0 auto 20px"></div>
+                    <p>Loading OmniTest Platform...</p>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="/js/utils.js"></script>
+    <script src="/js/global-store.js"></script>
+    <script src="/js/frame-manager.js"></script>
+    <script src="/js/cdn-detector.js"></script>
+    <script src="/js/performance-tester.js"></script>
+    <script src="/js/gap-analyzer.js"></script>
+    <script src="/js/realtime-monitor.js"></script>
+    <script src="/js/report-generator.js"></script>
+    <script src="/js/ci-cd-scheduler.js"></script>
+    <script src="/js/app.js"></script>
+</body>
+</html>

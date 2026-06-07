@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mesh Analysis - OmniTest CDN</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        *{margin:0;padding:0;box-sizing:border-box}body{font-family:'Inter',sans-serif;background:linear-gradient(135deg,#0a0a1a,#0f0f2a);color:#fff;padding:24px}.container{max-width:1200px;margin:0 auto}.card{background:rgba(15,21,53,0.6);border-radius:20px;padding:24px;margin-bottom:24px;border:1px solid rgba(79,70,229,0.2)}.hop-timeline{display:flex;align-items:center;flex-wrap:wrap;gap:8px;margin:20px 0}.hop-node{background:rgba(30,36,72,0.4);border-radius:12px;padding:12px;min-width:100px;text-align:center}.hop-node.bottleneck{border:2px solid #ef4444;background:rgba(239,68,68,0.1)}.hop-latency{font-size:20px;font-weight:700;color:#f59e0b}.hop-arrow{color:#4f46e5;font-size:20px}.input-group{margin-bottom:16px}input,select{width:100%;padding:12px;background:rgba(0,0,0,0.3);border:1px solid rgba(79,70,229,0.3);border-radius:12px;color:#fff}.btn-primary{background:linear-gradient(135deg,#4f46e5,#7c3aed);border:none;padding:12px 24px;border-radius:40px;color:#fff;cursor:pointer}
+    </style>
+</head>
+<body>
+    <div class="container"><h1 style="margin-bottom:24px">🌐 Hop-by-Hop Mesh Analysis</h1>
+    <div class="card"><div class="input-group"><label>Destination Host</label><input type="text" id="destHost" placeholder="iat.waf.lyric.adp.com" value="iat.waf.lyric.adp.com"></div>
+    <div class="input-group"><label>Source Region</label><select id="sourceRegion"><option value="usa">USA (Newark)</option><option value="india">India (Mumbai)</option><option value="uk">UK (London)</option><option value="australia">Australia (Sydney)</option></select></div>
+    <button id="traceBtn" class="btn-primary">🔍 Trace Path</button>
+    <div id="hopDiagram" class="hop-timeline" style="margin-top:20px"></div>
+    <div id="bottleneckAlert"></div></div></div>
+    <script>document.getElementById('traceBtn').addEventListener('click',()=>{const region=document.getElementById('sourceRegion').value;const dest=document.getElementById('destHost').value;const hops=[{hop:1,name:'Client',latency:2},{hop:2,name:'ISP Gateway',latency:5},{hop:3,name:'Akamai Edge',latency:12},{hop:4,name:'Akamai Shield',latency:45},{hop:5,name:'Origin',latency:89}];const diagram=document.getElementById('hopDiagram');diagram.innerHTML='';hops.forEach((hop,idx)=>{const node=document.createElement('div');node.className='hop-node';if(hop.latency>80)node.classList.add('bottleneck');node.innerHTML=`<div>Hop ${hop.hop}</div><div>${hop.name}</div><div class="hop-latency">${hop.latency}ms</div>`;diagram.appendChild(node);if(idx<hops.length-1){const arrow=document.createElement('span');arrow.className='hop-arrow';arrow.innerHTML='→';diagram.appendChild(arrow)}});const alertDiv=document.getElementById('bottleneckAlert');alertDiv.innerHTML='<div style="margin-top:20px;padding:16px;background:rgba(239,68,68,0.1);border-radius:12px"><strong>🔴 Bottleneck Detected at Hop 4 (Akamai Shield)</strong><br>Latency: 45ms (+33ms from previous hop)<br>Recommendation: Enable regional origin shield</div>'})</script>
+</body>
+</html>
