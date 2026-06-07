@@ -1,0 +1,23 @@
+# Create empty placeholder files for remaining structure
+touch frames/frame-observability.html
+touch frames/frame-legacy.html
+touch assets/logos/akamai.svg
+touch assets/logos/cloudflare.svg
+touch assets/logos/aws.svg
+touch assets/logos/azure.svg
+touch assets/logos/fastly.svg
+touch assets/favicon.ico
+touch tests/k6-scripts/full-stack-test.js
+touch tests/k6-scripts/smoke-test.js
+touch tests/k6-scripts/validate-fixes.js
+touch tests/jmeter/legacy-scripts.jmx
+touch tests/playwright/browser-test.spec.js
+touch config/prometheus.yml
+touch config/coroot.yml
+touch config/alerts.yml
+touch benchmarks/roofline.yml
+touch benchmarks/baseline.json
+touch .github/workflows/performance-test.yml
+touch docs/architecture.md
+touch docs/deployment.md
+touch docs/api-reference.md

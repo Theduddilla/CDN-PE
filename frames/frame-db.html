@@ -1,0 +1,4 @@
+<!DOCTYPE html>
+<html><head><meta charset="UTF-8"><title>Database Analysis</title><style>body{font-family:monospace;background:#0f0f2a;color:#fff;padding:16px}.metric{margin-bottom:16px;padding:12px;background:rgba(30,36,72,0.4);border-radius:8px}.value{font-size:24px;font-weight:700}</style></head>
+<body><h3>🗄️ Database</h3><div class="metric"><div>Query Time</div><div class="value" id="query">45ms</div></div><div class="metric"><div>Connection Pool</div><div class="value" id="pool">78%</div></div><div class="metric"><div>Lock Wait</div><div class="value" id="lock">12ms</div></div><script>setInterval(()=>{document.getElementById('query').innerHTML=Math.floor(Math.random()*100)+20+'ms';document.getElementById('pool').innerHTML=Math.floor(Math.random()*50)+40+'%';document.getElementById('lock').innerHTML=Math.floor(Math.random()*80)+5+'ms'},3000);window.parent.postMessage({type:'FRAME_READY',frameId:'db'},'*')</script></body>
+</html>

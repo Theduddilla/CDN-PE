@@ -1,0 +1,4 @@
+<!DOCTYPE html>
+<html><head><meta charset="UTF-8"><title>CDN Edge Analysis</title><style>body{font-family:monospace;background:#0f0f2a;color:#fff;padding:16px}.metric{margin-bottom:16px;padding:12px;background:rgba(30,36,72,0.4);border-radius:8px}.value{font-size:24px;font-weight:700}</style></head>
+<body><h3>🌐 CDN Edge</h3><div class="metric"><div>Cache Hit Ratio</div><div class="value" id="hitRatio">87%</div></div><div class="metric"><div>Edge TTFB</div><div class="value" id="ttfb">45ms</div></div><div class="metric"><div>CDN Provider</div><div class="value" id="provider">Akamai</div></div><script>setInterval(()=>{document.getElementById('hitRatio').innerHTML=Math.floor(Math.random()*30)+65+'%';document.getElementById('ttfb').innerHTML=Math.floor(Math.random()*80)+20+'ms'},3000);window.parent.postMessage({type:'FRAME_READY',frameId:'cdn'},'*')</script></body>
+</html>

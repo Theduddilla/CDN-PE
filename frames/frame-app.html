@@ -1,0 +1,4 @@
+<!DOCTYPE html>
+<html><head><meta charset="UTF-8"><title>Application Analysis</title><style>body{font-family:monospace;background:#0f0f2a;color:#fff;padding:16px}.metric{margin-bottom:16px;padding:12px;background:rgba(30,36,72,0.4);border-radius:8px}.value{font-size:24px;font-weight:700}</style></head>
+<body><h3>⚙️ Application</h3><div class="metric"><div>p95 Latency</div><div class="value" id="p95">156ms</div></div><div class="metric"><div>Thread Pool</div><div class="value" id="threads">67%</div></div><div class="metric"><div>GC Pauses</div><div class="value" id="gc">23ms</div></div><script>setInterval(()=>{document.getElementById('p95').innerHTML=Math.floor(Math.random()*200)+100+'ms';document.getElementById('threads').innerHTML=Math.floor(Math.random()*50)+30+'%';document.getElementById('gc').innerHTML=Math.floor(Math.random()*80)+10+'ms'},3000);window.parent.postMessage({type:'FRAME_READY',frameId:'app'},'*')</script></body>
+</html>

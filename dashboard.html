@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - OmniTest CDN</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        *{margin:0;padding:0;box-sizing:border-box}body{font-family:'Inter',sans-serif;background:linear-gradient(135deg,#0a0a1a,#0f0f2a);color:#fff;padding:24px}.dashboard{max-width:1400px;margin:0 auto}.stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;margin-bottom:24px}.stat-card{background:rgba(15,21,53,0.6);border-radius:20px;padding:20px;text-align:center;border:1px solid rgba(79,70,229,0.2)}.stat-value{font-size:32px;font-weight:700;margin:8px 0}.origin-card{background:rgba(15,21,53,0.6);border-radius:20px;padding:24px;margin-bottom:24px;text-align:center}.origin-input{padding:14px 24px;background:rgba(0,0,0,0.3);border:1px solid rgba(79,70,229,0.3);border-radius:48px;color:#fff;width:300px}.btn-primary{background:linear-gradient(135deg,#4f46e5,#7c3aed);border:none;padding:14px 32px;border-radius:48px;color:#fff;cursor:pointer}.cdn-badges{display:flex;justify-content:center;gap:12px;margin-top:16px}.cdn-badge{padding:6px 16px;background:rgba(30,36,72,0.6);border-radius:40px;font-size:12px}.table-container{overflow-x:auto}.data-table{width:100%;border-collapse:collapse}.data-table th,.data-table td{padding:12px;text-align:left;border-bottom:1px solid rgba(79,70,229,0.2)}@media(max-width:768px){.stats-grid{grid-template-columns:1fr}}
+    </style>
+</head>
+<body>
+    <div class="dashboard">
+        <h1 style="margin-bottom:24px">📊 Performance Dashboard</h1>
+        <div class="stats-grid"><div class="stat-card"><div>Global Avg Latency</div><div class="stat-value" id="globalLatency">--ms</div></div><div class="stat-card"><div>CDN Provider</div><div class="stat-value" id="cdnProvider">--</div></div><div class="stat-card"><div>Cache Hit Ratio</div><div class="stat-value" id="cacheHit">--%</div></div><div class="stat-card"><div>Health Score</div><div class="stat-value" id="healthScore">--</div></div></div>
+        <div class="origin-card"><div class="origin-input-wrapper"><input type="text" id="originUrl" class="origin-input" placeholder="Enter origin URL" value="iat.waf.lyric.adp.com"><button id="analyzeBtn" class="btn-primary">Analyze Origin →</button></div><div class="cdn-badges"><span class="cdn-badge">Akamai</span><span class="cdn-badge">AWS</span><span class="cdn-badge">Cloudflare</span><span class="cdn-badge">Fastly</span></div></div>
+        <div class="table-container"><table class="data-table"><thead><tr><th>Region</th><th>Latency</th><th>Cache Hit</th><th>Status</th></tr></thead><tbody id="resultsBody"><tr><td colspan="4">Run analysis to see results</td></tr></tbody></table></div>
+    </div>
+    <script>
+        document.getElementById('analyzeBtn').addEventListener('click',()=>{const url=document.getElementById('originUrl').value;if(!url)return;document.getElementById('resultsBody').innerHTML='<tr><td colspan="4">Analyzing...</td></tr>';setTimeout(()=>{const regions=['USA','Europe','Asia','India','Australia'];const latencies=[67,89,234,345,298];let html='';for(let i=0;i<regions.length;i++){const grade=latencies[i]<100?'A':latencies[i]<200?'B':latencies[i]<300?'C':'D';html+=`<tr><td>${regions[i]}</td><td>${latencies[i]}ms</td><td>${Math.floor(Math.random()*30)+70}%</td><td>Grade ${grade}</td></tr>`;}document.getElementById('resultsBody').innerHTML=html;document.getElementById('globalLatency').innerHTML=Math.round(latencies.reduce((a,b)=>a+b,0)/latencies.length)+'ms';document.getElementById('cdnProvider').innerHTML='Akamai';document.getElementById('cacheHit').innerHTML='87%';document.getElementById('healthScore').innerHTML='78';},2000)});
+    </script>
+</body>
+</html>

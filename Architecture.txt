@@ -1,0 +1,3 @@
+User → CDN Edge → Load Balancer → Origin Server → Application → Cache Layer → Database
+  ↓         ↓           ↓              ↓            ↓           ↓            ↓
+ RUM     Cache/TTFB  TLS/KeepAlive  Response    GC/Threads  Hit Ratio    Query Time

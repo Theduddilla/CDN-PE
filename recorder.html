@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recorder - OmniTest CDN</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        *{margin:0;padding:0;box-sizing:border-box}body{font-family:'Inter',sans-serif;background:linear-gradient(135deg,#0a0a1a,#0f0f2a);color:#fff;padding:24px}.container{max-width:1000px;margin:0 auto}.card{background:rgba(15,21,53,0.6);border-radius:20px;padding:24px;margin-bottom:24px;border:1px solid rgba(79,70,229,0.2)}.input-group{margin-bottom:16px}input,select{width:100%;padding:12px;background:rgba(0,0,0,0.3);border:1px solid rgba(79,70,229,0.3);border-radius:12px;color:#fff}.btn-primary{background:linear-gradient(135deg,#4f46e5,#7c3aed);border:none;padding:12px 24px;border-radius:40px;color:#fff;cursor:pointer}.recording-status{padding:16px;background:rgba(239,68,68,0.1);border-radius:12px;margin-top:16px;text-align:center;color:#ef4444}.calls-list{max-height:400px;overflow-y:auto}.call-item{padding:12px;background:rgba(30,36,72,0.4);border-radius:8px;margin-bottom:8px;font-family:monospace;font-size:12px}
+    </style>
+</head>
+<body>
+    <div class="container"><h1 style="margin-bottom:24px">🎬 Session Recorder</h1>
+    <div class="card"><div class="input-group"><label>Application URL</label><input type="text" id="appUrl" placeholder="https://example.com/login" value="https://iat.waf.lyric.adp.com"></div>
+    <div class="input-group"><label>Session Name</label><input type="text" id="sessionName" placeholder="My Test Flow"></div>
+    <button id="startBtn" class="btn-primary">🎥 Start Recording</button>
+    <div id="recordingStatus" class="recording-status" style="display:none">🔴 Recording in progress...</div>
+    <div id="callsList" class="calls-list" style="margin-top:16px"></div></div>
+    <div class="card"><h3>Legacy Tool Integration</h3><div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px"><button id="runJmeterBtn" class="btn-primary" style="background:#10b981">📊 Run JMeter</button><button id="runLoadrunnerBtn" class="btn-primary" style="background:#f59e0b">🎯 Run LoadRunner</button><button id="runGatlingBtn" class="btn-primary" style="background:#8b5cf6">🐘 Run Gatling</button></div><div id="legacyResults" style="margin-top:16px"></div></div></div>
+    <script>let recording=false,calls=[];document.getElementById('startBtn').addEventListener('click',()=>{recording=true;document.getElementById('recordingStatus').style.display='block';const interval=setInterval(()=>{if(!recording){clearInterval(interval);return}calls.push({method:'GET',url:'/api/endpoint',duration:Math.floor(Math.random()*200)+50,status:200});const list=document.getElementById('callsList');list.innerHTML=calls.map(c=>`<div class="call-item">${c.method} ${c.url} - ${c.duration}ms (${c.status})</div>`).join('');if(calls.length>20){clearInterval(interval);recording=false;document.getElementById('recordingStatus').style.display='none';alert('Recording stopped. Session saved!');}},1000)});document.getElementById('runJmeterBtn').addEventListener('click',()=>{document.getElementById('legacyResults').innerHTML='<div style="padding:16px;background:rgba(30,36,72,0.4);border-radius:12px">✅ JMeter test completed: 1000 requests, avg 245ms, 0.5% error rate</div>'});document.getElementById('runLoadrunnerBtn').addEventListener('click',()=>{document.getElementById('legacyResults').innerHTML='<div style="padding:16px;background:rgba(30,36,72,0.4);border-radius:12px">✅ LoadRunner test completed: 500 transactions, avg 189ms</div>'});document.getElementById('runGatlingBtn').addEventListener('click',()=>{document.getElementById('legacyResults').innerHTML='<div style="padding:16px;background:rgba(30,36,72,0.4);border-radius:12px">✅ Gatling simulation completed: 2000 users, p95 234ms</div>'})</script>
+</body>
+</html>

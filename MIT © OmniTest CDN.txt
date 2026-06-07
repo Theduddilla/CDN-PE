@@ -1,0 +1,11 @@
+
+### **File: `.gitignore`**
+
+```gitignore
+node_modules/
+.env
+.DS_Store
+.netlify/
+*.log
+dist/
+build/
