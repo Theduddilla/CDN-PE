@@ -1,0 +1,5 @@
+<!DOCTYPE html>
+<html><head><meta charset="UTF-8"><title>Load Balancer</title><style>body{background:#0f0f2a;color:#fff;padding:16px;font-family:monospace}.metric{padding:12px;background:rgba(30,36,72,0.4);border-radius:8px;margin-bottom:8px}.value{font-size:24px;font-weight:700}</style></head>
+<body><h3>🔄 Load Balancer</h3><div class="metric"><div>TLS Handshake</div><div class="value" id="tls">34ms</div></div><div class="metric"><div>Keep-Alive</div><div class="value" id="ka">89%</div></div><div class="metric"><div>Queue Size</div><div class="value" id="queue">12</div></div>
+<script>setInterval(()=>{document.getElementById('tls').innerHTML=Math.floor(Math.random()*60)+20+'ms';document.getElementById('ka').innerHTML=Math.floor(Math.random()*30)+65+'%';document.getElementById('queue').innerHTML=Math.floor(Math.random()*50)},3000);window.parent.postMessage({type:'FRAME_READY',frameId:'lb'},'*')</script></body>
+</html>

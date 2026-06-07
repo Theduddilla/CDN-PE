@@ -1,0 +1,4 @@
+<!DOCTYPE html>
+<html><head><meta charset="UTF-8"><title>Cache Analysis</title><style>body{font-family:monospace;background:#0f0f2a;color:#fff;padding:16px}.metric{margin-bottom:16px;padding:12px;background:rgba(30,36,72,0.4);border-radius:8px}.value{font-size:24px;font-weight:700}</style></head>
+<body><h3>💾 Cache Layer</h3><div class="metric"><div>Hit Ratio</div><div class="value" id="hitRatio">89%</div></div><div class="metric"><div>Eviction Rate</div><div class="value" id="eviction">2.3/s</div></div><div class="metric"><div>Fragmentation</div><div class="value" id="frag">112%</div></div><script>setInterval(()=>{document.getElementById('hitRatio').innerHTML=Math.floor(Math.random()*25)+70+'%';document.getElementById('eviction').innerHTML=(Math.random()*8+1).toFixed(1)+'/s';document.getElementById('frag').innerHTML=(Math.random()*50+100).toFixed(0)+'%'},3000);window.parent.postMessage({type:'FRAME_READY',frameId:'cache'},'*')</script></body>
+</html>
