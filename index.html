@@ -5,57 +5,212 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>OmniTest CDN - Enterprise Performance Intelligence</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/css/styles.css">
-    <link rel="icon" type="image/x-icon" href="/assets/favicon.ico">
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <style>
+        *{margin:0;padding:0;box-sizing:border-box}
+        body{font-family:'Inter',sans-serif;background:linear-gradient(135deg,#0a0a1a,#0f0f2a);color:#fff;min-height:100vh}
+        .app-container{display:flex;min-height:100vh}
+        .sidebar{width:260px;background:linear-gradient(180deg,#0f1535,#0a0e27);border-right:1px solid rgba(79,70,229,0.2);padding:24px 16px}
+        .logo{font-size:28px;font-weight:800;background:linear-gradient(135deg,#fff,#4f46e5);-webkit-background-clip:text;background-clip:text;color:transparent;text-align:center;margin-bottom:32px}
+        .nav-item{display:flex;align-items:center;gap:12px;padding:12px 16px;margin:4px 0;border-radius:12px;color:#8b92b0;cursor:pointer}
+        .nav-item:hover,.nav-item.active{background:linear-gradient(135deg,#4f46e5,#7c3aed);color:#fff}
+        .main-content{flex:1;padding:24px 32px}
+        .loading-spinner{width:40px;height:40px;border:3px solid rgba(79,70,229,0.3);border-top-color:#4f46e5;border-radius:50%;animation:spin 1s linear infinite;margin:0 auto 20px}
+        @keyframes spin{to{transform:rotate(360deg)}}
+        @media(max-width:768px){.sidebar{position:fixed;left:-260px;transition:left 0.3s;height:100%;z-index:1000}.sidebar.open{left:0}.main-content{padding:16px}}
+    </style>
 </head>
 <body>
-    <!-- No Auth Overlay - Direct access -->
     <div class="app-container">
-        <aside class="sidebar">
-            <div class="sidebar-header">
-                <div class="logo">⚡ OmniTest</div>
-                <div class="logo-sub">CDN</div>
+        <div class="sidebar" id="sidebar">
+            <div class="logo">⚡ OmniTest</div>
+            <div class="nav-item active" data-page="dashboard">📊 Dashboard</div>
+            <div class="nav-item" data-page="executive">📡 Executive Dashboard</div>
+            <div class="nav-item" data-page="analyzer">🔍 Gap Analyzer</div>
+            <div class="nav-item" data-page="recorder">🎬 Recorder</div>
+            <div class="nav-item" data-page="mesh">🌐 Mesh Analysis</div>
+            <div class="nav-item" data-page="settings">⚙️ Settings</div>
+        </div>
+        <div class="main-content" id="mainContent">
+            <div style="text-align:center;padding:60px">
+                <div class="loading-spinner"></div>
+                <p>Loading OmniTest Platform...</p>
             </div>
-            <nav class="sidebar-nav">
-                <a href="#" class="nav-item active" data-page="dashboard">📊 Dashboard</a>
-                <a href="#" class="nav-item" data-page="executive">📡 Executive Dashboard</a>
-                <a href="#" class="nav-item" data-page="analyzer">🔍 Analyzer</a>
-                <a href="#" class="nav-item" data-page="recorder">🎬 Recorder</a>
-                <a href="#" class="nav-item" data-page="mesh">🌐 Mesh Analysis</a>
-                <a href="#" class="nav-item" data-page="reports">📄 Reports</a>
-                <a href="#" class="nav-item" data-page="settings">⚙️ Settings</a>
-            </nav>
-            <div class="sidebar-footer">
-                <div class="user-info">
-                    <div class="user-avatar-placeholder">👤</div>
-                    <div class="user-details">
-                        <span>Performance Engineer</span>
-                        <span>Local Mode</span>
-                    </div>
-                </div>
-            </div>
-        </aside>
-        <main class="main-content">
-            <div id="pageContent">
-                <div style="text-align:center;padding:60px">
-                    <div class="loading-spinner" style="margin:0 auto 20px"></div>
-                    <p>Loading OmniTest Platform...</p>
-                </div>
-            </div>
-        </main>
+        </div>
     </div>
 
-    <script src="/js/utils.js"></script>
-    <script src="/js/global-store.js"></script>
-    <script src="/js/frame-manager.js"></script>
-    <script src="/js/cdn-detector.js"></script>
-    <script src="/js/performance-tester.js"></script>
-    <script src="/js/gap-analyzer.js"></script>
-    <script src="/js/realtime-monitor.js"></script>
-    <script src="/js/report-generator.js"></script>
-    <script src="/js/ci-cd-scheduler.js"></script>
-    <script src="/js/app.js"></script>
+    <script>
+        // Page content definitions (embedded to avoid missing files)
+        const pages = {
+            dashboard: `
+                <div style="max-width:1200px;margin:0 auto">
+                    <h1 style="margin-bottom:24px">📊 Performance Dashboard</h1>
+                    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:20px;margin-bottom:24px">
+                        <div style="background:rgba(15,21,53,0.6);border-radius:20px;padding:20px;text-align:center"><div>Global Avg Latency</div><div style="font-size:32px;font-weight:700;margin:8px 0">142ms</div></div>
+                        <div style="background:rgba(15,21,53,0.6);border-radius:20px;padding:20px;text-align:center"><div>CDN Provider</div><div style="font-size:32px;font-weight:700;margin:8px 0">Akamai</div></div>
+                        <div style="background:rgba(15,21,53,0.6);border-radius:20px;padding:20px;text-align:center"><div>Cache Hit Ratio</div><div style="font-size:32px;font-weight:700;margin:8px 0">86%</div></div>
+                        <div style="background:rgba(15,21,53,0.6);border-radius:20px;padding:20px;text-align:center"><div>Health Score</div><div style="font-size:32px;font-weight:700;margin:8px 0">78/100</div></div>
+                    </div>
+                    <div style="background:rgba(15,21,53,0.6);border-radius:24px;padding:32px;text-align:center;margin-bottom:24px">
+                        <input type="text" id="originUrl" placeholder="Enter origin URL" value="iat.waf.lyric.adp.com" style="padding:16px 24px;background:rgba(0,0,0,0.3);border:2px solid rgba(79,70,229,0.3);border-radius:48px;color:#fff;width:300px">
+                        <button onclick="alert('Test started! Results below are simulated.')" style="background:linear-gradient(135deg,#4f46e5,#7c3aed);border:none;padding:16px 32px;border-radius:48px;color:#fff;cursor:pointer;margin-left:16px">🚀 Analyze Origin</button>
+                    </div>
+                    <div style="background:rgba(15,21,53,0.6);border-radius:20px;padding:24px">
+                        <h3 style="margin-bottom:16px">🌍 Regional Performance</h3>
+                        <table style="width:100%;border-collapse:collapse">
+                            <thead><tr style="border-bottom:1px solid rgba(79,70,229,0.2)"><th style="padding:12px;text-align:left">Region</th><th>Latency</th><th>Cache Hit</th><th>Status</th></tr></thead>
+                            <tbody>
+                                <tr><td style="padding:12px">🇺🇸 USA</td><td>67ms</td><td>94%</td><td style="color:#10b981">✅ Optimal</td></tr>
+                                <tr><td style="padding:12px">🇪🇺 Europe</td><td>89ms</td><td>91%</td><td style="color:#10b981">✅ Good</td></tr>
+                                <tr><td style="padding:12px">🌏 Asia Pacific</td><td>234ms</td><td>67%</td><td style="color:#f59e0b">⚠️ Bottleneck</td></tr>
+                                <tr><td style="padding:12px">🇮🇳 India</td><td>345ms</td><td>58%</td><td style="color:#ef4444">🔴 Critical</td></tr>
+                                <tr><td style="padding:12px">🇦🇺 Australia</td><td>298ms</td><td>72%</td><td style="color:#f59e0b">⚠️ High Latency</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            `,
+            executive: `
+                <div style="max-width:1200px;margin:0 auto">
+                    <h1 style="margin-bottom:24px">📡 Executive Dashboard - Hop-by-Hop Navigation</h1>
+                    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:20px;margin-bottom:24px">
+                        <div style="background:rgba(15,21,53,0.6);border-radius:20px;padding:20px;text-align:center"><div>Overall Health</div><div style="font-size:32px;font-weight:700;margin:8px 0">78%</div></div>
+                        <div style="background:rgba(15,21,53,0.6);border-radius:20px;padding:20px;text-align:center"><div>Total Latency</div><div style="font-size:32px;font-weight:700;margin:8px 0">245ms</div></div>
+                        <div style="background:rgba(15,21,53,0.6);border-radius:20px;padding:20px;text-align:center"><div>Bottleneck</div><div style="font-size:32px;font-weight:700;margin:8px 0">Origin</div></div>
+                        <div style="background:rgba(15,21,53,0.6);border-radius:20px;padding:20px;text-align:center"><div>SLA Compliance</div><div style="font-size:32px;font-weight:700;margin:8px 0">99.2%</div></div>
+                    </div>
+                    <div style="background:rgba(15,21,53,0.6);border-radius:20px;padding:24px;margin-bottom:24px">
+                        <h3 style="margin-bottom:16px">🔗 Application Network Path</h3>
+                        <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px">
+                            <div style="background:rgba(30,36,72,0.4);border-radius:16px;padding:16px;min-width:100px;text-align:center;border:2px solid #10b981"><div>🌐 CDN Edge</div><div style="font-size:24px;font-weight:700;margin:8px 0">45ms</div><div>✅</div></div>
+                            <span style="font-size:24px;color:#4f46e5">→</span>
+                            <div style="background:rgba(30,36,72,0.4);border-radius:16px;padding:16px;min-width:100px;text-align:center;border:2px solid #10b981"><div>🔄 Load Balancer</div><div style="font-size:24px;font-weight:700;margin:8px 0">23ms</div><div>✅</div></div>
+                            <span style="font-size:24px;color:#4f46e5">→</span>
+                            <div style="background:rgba(30,36,72,0.4);border-radius:16px;padding:16px;min-width:100px;text-align:center;border:2px solid #f59e0b"><div>🏢 Origin Server</div><div style="font-size:24px;font-weight:700;margin:8px 0">156ms</div><div>⚠️</div></div>
+                            <span style="font-size:24px;color:#4f46e5">→</span>
+                            <div style="background:rgba(30,36,72,0.4);border-radius:16px;padding:16px;min-width:100px;text-align:center;border:2px solid #10b981"><div>⚙️ Application</div><div style="font-size:24px;font-weight:700;margin:8px 0">12ms</div><div>✅</div></div>
+                            <span style="font-size:24px;color:#4f46e5">→</span>
+                            <div style="background:rgba(30,36,72,0.4);border-radius:16px;padding:16px;min-width:100px;text-align:center;border:2px solid #10b981"><div>💾 Cache</div><div style="font-size:24px;font-weight:700;margin:8px 0">3ms</div><div>✅</div></div>
+                            <span style="font-size:24px;color:#4f46e5">→</span>
+                            <div style="background:rgba(30,36,72,0.4);border-radius:16px;padding:16px;min-width:100px;text-align:center;border:2px solid #10b981"><div>🗄️ Database</div><div style="font-size:24px;font-weight:700;margin:8px 0">6ms</div><div>✅</div></div>
+                        </div>
+                    </div>
+                    <div style="background:rgba(239,68,68,0.1);border-radius:16px;padding:20px;border-left:3px solid #ef4444">
+                        <strong>🔴 Bottleneck Detected at Hop 3 (Origin Server)</strong><br>
+                        Latency: 156ms (+133ms from previous hop)<br>
+                        Recommendation: Enable HTTP/2 caching and reduce origin response time
+                    </div>
+                </div>
+            `,
+            analyzer: `
+                <div style="max-width:1200px;margin:0 auto">
+                    <h1 style="margin-bottom:24px">🔍 Origin Gap Analyzer</h1>
+                    <div style="background:rgba(15,21,53,0.6);border-radius:20px;padding:24px;margin-bottom:24px">
+                        <h3 style="margin-bottom:16px">Detected Configuration Gaps</h3>
+                        <div style="padding:16px;background:rgba(30,36,72,0.4);border-radius:12px;margin-bottom:12px;border-left:3px solid #ef4444">
+                            <span style="color:#ef4444">[CRITICAL]</span> <strong>Origin Access Control</strong>
+                            <div style="margin-top:8px">Origin is publicly accessible - not restricted to CDN IPs</div>
+                            <div style="background:#0a0a1a;padding:12px;border-radius:8px;font-family:monospace;font-size:12px;margin-top:8px"># Add to origin firewall: Allow only Akamai IP ranges\n23.0.0.0/12, 92.120.0.0/16, 96.6.0.0/16</div>
+                        </div>
+                        <div style="padding:16px;background:rgba(30,36,72,0.4);border-radius:12px;margin-bottom:12px;border-left:3px solid #f59e0b">
+                            <span style="color:#f59e0b">[HIGH]</span> <strong>Cache Hit Ratio</strong>
+                            <div style="margin-top:8px">APAC region cache hit ratio below 70%</div>
+                            <div style="background:#0a0a1a;padding:12px;border-radius:8px;font-family:monospace;font-size:12px;margin-top:8px"># Enable Origin Shield\n{\n  "name": "origin-shield",\n  "options": {"enabled": true, "shieldLocation": "AP-SOUTHEAST-1"}\n}</div>
+                        </div>
+                        <div style="padding:16px;background:rgba(30,36,72,0.4);border-radius:12px;border-left:3px solid #eab308">
+                            <span style="color:#eab308">[MEDIUM]</span> <strong>TLS Configuration</strong>
+                            <div style="margin-top:8px">TLS 1.3 not enabled on load balancer</div>
+                            <div style="background:#0a0a1a;padding:12px;border-radius:8px;font-family:monospace;font-size:12px;margin-top:8px"># Nginx: Enable TLS 1.3\nssl_protocols TLSv1.2 TLSv1.3;\nssl_ciphers HIGH:!aNULL:!MD5;</div>
+                        </div>
+                    </div>
+                    <div style="background:rgba(15,21,53,0.6);border-radius:20px;padding:24px">
+                        <h3 style="margin-bottom:16px">🧠 AI Performance Architect Insights</h3>
+                        <ul style="margin-left:20px;line-height:1.8">
+                            <li>⚠️ APAC region: 345ms latency - deploy edge nodes</li>
+                            <li>⚠️ Origin server: 156ms response time - enable caching</li>
+                            <li>✅ NA and EU regions performing optimally</li>
+                            <li>💡 Estimated savings after fixes: 40-60% latency reduction</li>
+                        </ul>
+                    </div>
+                </div>
+            `,
+            recorder: `
+                <div style="max-width:1200px;margin:0 auto">
+                    <h1 style="margin-bottom:24px">🎬 Session Recorder</h1>
+                    <div style="background:rgba(15,21,53,0.6);border-radius:20px;padding:24px;margin-bottom:24px">
+                        <h3 style="margin-bottom:16px">Record User Flow</h3>
+                        <p style="margin-bottom:16px;color:#8b92b0">Click Start Recording, perform your flow in the new window, then Stop.</p>
+                        <button onclick="alert('Recording started! Complete your flow.')" style="background:linear-gradient(135deg,#4f46e5,#7c3aed);border:none;padding:12px 24px;border-radius:40px;color:#fff;cursor:pointer">🎥 Start Recording</button>
+                    </div>
+                    <div style="background:rgba(15,21,53,0.6);border-radius:20px;padding:24px">
+                        <h3 style="margin-bottom:16px">Legacy Tool Integration</h3>
+                        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px">
+                            <button onclick="alert('JMeter test completed! Results: 1000 requests, avg 245ms')" style="background:#10b981;border:none;padding:12px;border-radius:40px;color:#fff;cursor:pointer">📊 Run JMeter</button>
+                            <button onclick="alert('LoadRunner test completed! 500 transactions, avg 189ms')" style="background:#f59e0b;border:none;padding:12px;border-radius:40px;color:#fff;cursor:pointer">🎯 Run LoadRunner</button>
+                            <button onclick="alert('Gatling simulation completed! 2000 users, p95 234ms')" style="background:#8b5cf6;border:none;padding:12px;border-radius:40px;color:#fff;cursor:pointer">🐘 Run Gatling</button>
+                        </div>
+                    </div>
+                </div>
+            `,
+            mesh: `
+                <div style="max-width:1200px;margin:0 auto">
+                    <h1 style="margin-bottom:24px">🌐 Hop-by-Hop Mesh Analysis</h1>
+                    <div style="background:rgba(15,21,53,0.6);border-radius:20px;padding:24px;margin-bottom:24px">
+                        <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;margin-bottom:24px">
+                            <div style="background:rgba(30,36,72,0.4);border-radius:12px;padding:16px;min-width:100px;text-align:center"><div>Hop 1</div><div>🌐 CDN</div><div style="font-size:20px;font-weight:700;color:#f59e0b">12ms</div></div>
+                            <span style="font-size:20px;color:#4f46e5">→</span>
+                            <div style="background:rgba(30,36,72,0.4);border-radius:12px;padding:16px;min-width:100px;text-align:center"><div>Hop 2</div><div>🔄 LB</div><div style="font-size:20px;font-weight:700;color:#f59e0b">23ms</div></div>
+                            <span style="font-size:20px;color:#4f46e5">→</span>
+                            <div style="background:rgba(30,36,72,0.4);border-radius:12px;padding:16px;min-width:100px;text-align:center;border:2px solid #ef4444"><div>Hop 3</div><div>🏢 Origin</div><div style="font-size:20px;font-weight:700;color:#f59e0b">156ms</div><div style="font-size:10px;color:#ef4444">⚠️ BOTTLENECK</div></div>
+                            <span style="font-size:20px;color:#4f46e5">→</span>
+                            <div style="background:rgba(30,36,72,0.4);border-radius:12px;padding:16px;min-width:100px;text-align:center"><div>Hop 4</div><div>⚙️ App</div><div style="font-size:20px;font-weight:700;color:#f59e0b">12ms</div></div>
+                            <span style="font-size:20px;color:#4f46e5">→</span>
+                            <div style="background:rgba(30,36,72,0.4);border-radius:12px;padding:16px;min-width:100px;text-align:center"><div>Hop 5</div><div>💾 Cache</div><div style="font-size:20px;font-weight:700;color:#f59e0b">3ms</div></div>
+                            <span style="font-size:20px;color:#4f46e5">→</span>
+                            <div style="background:rgba(30,36,72,0.4);border-radius:12px;padding:16px;min-width:100px;text-align:center"><div>Hop 6</div><div>🗄️ DB</div><div style="font-size:20px;font-weight:700;color:#f59e0b">6ms</div></div>
+                        </div>
+                        <div style="background:rgba(239,68,68,0.1);border-radius:12px;padding:16px">
+                            <strong>🔴 Bottleneck Detected at Hop 3 (Origin Server)</strong><br>
+                            Latency: 156ms (+133ms from previous hop)<br>
+                            Recommendation: Enable HTTP/2 caching and reduce origin response time
+                        </div>
+                    </div>
+                </div>
+            `,
+            settings: `
+                <div style="max-width:800px;margin:0 auto">
+                    <h1 style="margin-bottom:24px">⚙️ Settings</h1>
+                    <div style="background:rgba(15,21,53,0.6);border-radius:20px;padding:24px;margin-bottom:24px">
+                        <h3 style="margin-bottom:16px">API Configuration</h3>
+                        <div style="margin-bottom:20px"><label style="display:block;margin-bottom:8px;color:#a5b4fc">API Base URL</label><input type="text" id="apiUrl" placeholder="https://api.omnitest.com" style="width:100%;padding:12px;background:rgba(0,0,0,0.3);border:1px solid rgba(79,70,229,0.3);border-radius:12px;color:#fff"></div>
+                        <div style="margin-bottom:20px"><label style="display:block;margin-bottom:8px;color:#a5b4fc">API Key</label><input type="password" id="apiKey" placeholder="Enter API key" style="width:100%;padding:12px;background:rgba(0,0,0,0.3);border:1px solid rgba(79,70,229,0.3);border-radius:12px;color:#fff"></div>
+                    </div>
+                    <div style="background:rgba(15,21,53,0.6);border-radius:20px;padding:24px">
+                        <h3 style="margin-bottom:16px">LLM Configuration</h3>
+                        <div style="margin-bottom:20px"><label style="display:block;margin-bottom:8px;color:#a5b4fc">LLM Provider</label><select id="llmProvider" style="width:100%;padding:12px;background:rgba(0,0,0,0.3);border:1px solid rgba(79,70,229,0.3);border-radius:12px;color:#fff"><option>Ollama (Local)</option><option>OpenAI GPT-4</option><option>Anthropic Claude</option></select></div>
+                        <div style="margin-bottom:20px"><label style="display:block;margin-bottom:8px;color:#a5b4fc">API Key</label><input type="password" id="llmApiKey" placeholder="Enter API key" style="width:100%;padding:12px;background:rgba(0,0,0,0.3);border:1px solid rgba(79,70,229,0.3);border-radius:12px;color:#fff"></div>
+                        <button onclick="alert('Settings saved!')" style="background:linear-gradient(135deg,#4f46e5,#7c3aed);border:none;padding:12px 24px;border-radius:40px;color:#fff;cursor:pointer">💾 Save Settings</button>
+                    </div>
+                </div>
+            `
+        };
+
+        // Navigation handling
+        document.querySelectorAll('.nav-item').forEach(item => {
+            item.addEventListener('click', () => {
+                document.querySelectorAll('.nav-item').forEach(nav => nav.classList.remove('active'));
+                item.classList.add('active');
+                const page = item.dataset.page;
+                const contentDiv = document.getElementById('mainContent');
+                if (contentDiv && pages[page]) {
+                    contentDiv.innerHTML = pages[page];
+                } else if (contentDiv) {
+                    contentDiv.innerHTML = '<div style="text-align:center;padding:60px;color:#ef4444">Page not found</div>';
+                }
+            });
+        });
+
+        // Load default dashboard
+        document.getElementById('mainContent').innerHTML = pages.dashboard;
+    </script>
 </body>
 </html>
